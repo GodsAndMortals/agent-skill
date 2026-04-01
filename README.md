@@ -6,15 +6,34 @@ Play **Gods & Mortals (RoOLZ)** — a multiplayer strategy RPG on the TON blockc
 
 ## Prerequisites
 
-### Get an Agent Token
+### 1. Get an Agent Token
 1. Open the game at [roolzgods.com](https://roolzgods.com) via Telegram
 2. Go to **Settings > Agent Access > Create Token**
 3. Enable scopes: `read`, `combat`, `economy`, `casino`, `social`, `management`
 4. Copy the token
 
-### Set the Token
+### 2. Set the Token
+
+Make the token available as an environment variable. Choose your platform:
+
+**Linux / macOS (bash/zsh)** — add to `~/.bashrc` or `~/.zshrc` for persistence:
 ```bash
 export GODSX_AGENT_TOKEN=your_token_here
+```
+
+**Windows (PowerShell)**:
+```powershell
+$env:GODSX_AGENT_TOKEN = "your_token_here"
+```
+
+**Windows (CMD)**:
+```cmd
+set GODSX_AGENT_TOKEN=your_token_here
+```
+
+Or create a `.env` file in your project root:
+```
+GODSX_AGENT_TOKEN=your_token_here
 ```
 
 ## Installation
@@ -25,14 +44,39 @@ Upload the skill directly at [claude.ai](https://claude.ai):
 2. Upload **one** of these:
    - **`gods-and-mortals.skill`** (recommended) — pre-built bundle with SKILL.md + all references
    - **`SKILL.md`** — standalone file (works but won't include reference docs)
-3. Configure the MCP server separately in Claude.ai's MCP settings
+3. Configure the MCP server separately in Claude.ai's MCP settings:
+   - **URL**: `https://app.roolzgods.com/mcp`
+   - **Auth Header**: `Authorization: Bearer <your_token>`
 
-### Claude Code (CLI Plugin)
+### Claude Code (CLI)
+
+**Recommended method** — register the MCP server directly:
+```bash
+claude mcp add godsx-mortals "https://app.roolzgods.com/mcp" \
+  -t http -s project \
+  -H "Authorization: Bearer $GODSX_AGENT_TOKEN"
+```
+
+Then clone this repo so Claude Code can read the skill:
+```bash
+git clone https://github.com/GodsAndMortals/agent-skill.git
+```
+
+**Alternative** — install as a plugin (also registers the MCP server via `.mcp.json`):
 ```bash
 claude plugins install github:GodsAndMortals/agent-skill
 ```
 
-The plugin auto-configures the MCP server via `.mcp.json`. Just set `GODSX_AGENT_TOKEN` and start playing:
+> **Important: Restart Required**
+> After adding the MCP server, **restart your Claude Code session**. MCP servers only connect at startup — tools won't appear until you restart.
+
+### Verify It Works
+```bash
+claude mcp list
+# Should show: godsx-mortals: https://app.roolzgods.com/mcp (HTTP) - Connected
+```
+
+Then try:
 ```
 > Play Gods & Mortals for me
 > Do heists until my tickets run out
@@ -111,6 +155,17 @@ If your LLM doesn't support MCP but has tool/function calling:
 | `references/tool-reference.md` | Complete MCP tool catalog (175 tools, 13 categories) |
 | `references/resource-management.md` | Addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
 | `references/phase-strategy.md` | Phase-by-phase strategy with class-specific notes |
+
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| Tools not appearing after config | **Restart Claude Code session** — MCP servers only connect at startup |
+| `405 Not Allowed` | Ensure URL is `app.roolzgods.com/mcp` (not `roolzgods.com/mcp`) |
+| `Maximum N concurrent sessions` | Close other sessions using the same token, or create a new token |
+| `Missing or invalid agent token` | Check `GODSX_AGENT_TOKEN` env var is set and token hasn't expired |
+| `settings.local.json` MCP not loading | Use `claude mcp add` CLI instead of manual JSON editing |
+| `export` not recognized (Windows) | Use `$env:GODSX_AGENT_TOKEN = "..."` (PowerShell) or `set GODSX_AGENT_TOKEN=...` (CMD) |
 
 ## Links
 
