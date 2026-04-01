@@ -1,0 +1,10 @@
+{
+  "name": "gods-and-mortals",
+  "description": "Play Gods & Mortals (RoOLZ) strategy RPG via MCP tools. Orchestrates combat, economy, training, social, and casino systems with phase-aware strategy for a round-based mythological RPG on the TON blockchain.",
+  "author": {
+    "name": "PromptEra",
+    "url": "https://roolzgods.com"
+  },
+  "version": "1.0.0",
+  "keywords": ["game", "rpg", "strategy", "mcp", "telegram", "ton", "blockchain"]
+}

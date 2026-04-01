@@ -1,0 +1,7 @@
+{
+  "godsx-mortals": {
+    "type": "http",
+    "url": "https://roolzgods.com/mcp",
+    "note": "Requires an agent token. Get one from the game: Settings > Agent Access > Create Token. Set the GODSX_AGENT_TOKEN environment variable."
+  }
+}
