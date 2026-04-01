@@ -51,7 +51,7 @@ Then configure the MCP server in Cursor settings:
   "mcpServers": {
     "godsx-mortals": {
       "type": "http",
-      "url": "https://roolzgods.com/mcp",
+      "url": "https://app.roolzgods.com/mcp",
       "headers": {
         "Authorization": "Bearer ${GODSX_AGENT_TOKEN}"
       }
@@ -71,7 +71,7 @@ Any LLM that supports MCP tools can play. Configure the MCP server:
 | Setting | Value |
 |---------|-------|
 | **Type** | `http` (StreamableHTTP) |
-| **URL** | `https://roolzgods.com/mcp` |
+| **URL** | `https://app.roolzgods.com/mcp` |
 | **Auth Header** | `Authorization: Bearer <your_token>` |
 
 Then include the `SKILL.md` file in your system prompt or context to teach the LLM how to play.
@@ -79,7 +79,7 @@ Then include the `SKILL.md` file in your system prompt or context to teach the L
 ### Manual (Any LLM Without MCP)
 If your LLM doesn't support MCP but has tool/function calling:
 1. Read `references/tool-reference.md` for the complete API
-2. Map each MCP tool to an HTTP call to `https://roolzgods.com/mcp`
+2. Map each MCP tool to an HTTP call to `https://app.roolzgods.com/mcp`
 3. Include `SKILL.md` in the system prompt for gameplay strategy
 
 ## What the Skill Does
@@ -115,7 +115,7 @@ If your LLM doesn't support MCP but has tool/function calling:
 ## Links
 
 - **Game**: [roolzgods.com](https://roolzgods.com)
-- **MCP Endpoint**: `https://roolzgods.com/mcp` (StreamableHTTP)
+- **MCP Endpoint**: `https://app.roolzgods.com/mcp` (StreamableHTTP)
 - **Author**: [PromptEra](https://github.com/PromptEra)
 
 ## License

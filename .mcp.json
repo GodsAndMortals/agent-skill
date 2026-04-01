@@ -1,7 +1,7 @@
 {
   "godsx-mortals": {
     "type": "http",
-    "url": "https://roolzgods.com/mcp",
+    "url": "https://app.roolzgods.com/mcp",
     "headers": {
       "Authorization": "Bearer ${GODSX_AGENT_TOKEN}"
     }
