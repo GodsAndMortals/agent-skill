@@ -1,51 +1,78 @@
-# Gods & Mortals - Claude Code Skill
+# Gods & Mortals - Agent Skill
 
-Play **Gods & Mortals (RoOLZ)** — a multiplayer strategy RPG on the TON blockchain — directly from Claude Code via MCP tools.
+Play **Gods & Mortals (RoOLZ)** — a multiplayer strategy RPG on the TON blockchain — using AI agents via MCP tools.
 
-8 Divine Kingdoms compete for power across 13-day rounds. This skill teaches Claude how to play optimally: heisting, training, banking, assaulting, managing guilds, and climbing the leaderboard.
+8 Divine Kingdoms compete for power across 13-day rounds. This skill teaches any LLM how to play optimally: heisting, training, banking, assaulting, managing guilds, and climbing the leaderboard.
 
-## Installation
+## Prerequisites
 
-### Claude Code
-```bash
-claude plugins install github:PromptEra/gods-and-mortals-skill
-```
-
-### Manual
-Copy this directory into your Claude Code plugins folder.
-
-## Setup
-
-### 1. Get an Agent Token
+### Get an Agent Token
 1. Open the game at [roolzgods.com](https://roolzgods.com) via Telegram
 2. Go to **Settings > Agent Access > Create Token**
 3. Enable scopes: `read`, `combat`, `economy`, `casino`, `social`, `management`
+4. Copy the token
 
-### 2. Configure the MCP Server
-The plugin auto-configures the MCP connection via `.mcp.json`. Set your token:
-
+### Set the Token
 ```bash
 export GODSX_AGENT_TOKEN=your_token_here
 ```
 
-Or add it to your `.claude/settings.json`:
-```json
-{
-  "env": {
-    "GODSX_AGENT_TOKEN": "your_token_here"
-  }
-}
+## Installation
+
+### Claude Code (Plugin)
+```bash
+claude plugins install github:GodsAndMortals/agent-skill
 ```
 
-### 3. Play
-
+The plugin auto-configures the MCP server via `.mcp.json`. Just set `GODSX_AGENT_TOKEN` and start playing:
 ```
 > Play Gods & Mortals for me
 > Do heists until my tickets run out
 > Check my game status
-> Manage my kingdom
-> Train my stats optimally
 ```
+
+### Cursor
+Copy the skill into your Cursor skills directory:
+```bash
+cp -r skills/gods-and-mortals ~/.cursor/skills-cursor/gods-and-mortals
+```
+
+Then configure the MCP server in Cursor settings:
+```json
+{
+  "mcpServers": {
+    "godsx-mortals": {
+      "type": "http",
+      "url": "https://roolzgods.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GODSX_AGENT_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+### Codex / OpenClaw
+```bash
+cp -r skills/gods-and-mortals ~/.codex/skills/gods-and-mortals
+```
+
+### Any MCP-Compatible LLM
+Any LLM that supports MCP tools can play. Configure the MCP server:
+
+| Setting | Value |
+|---------|-------|
+| **Type** | `http` (StreamableHTTP) |
+| **URL** | `https://roolzgods.com/mcp` |
+| **Auth Header** | `Authorization: Bearer <your_token>` |
+
+Then include the `SKILL.md` file in your system prompt or context to teach the LLM how to play.
+
+### Manual (Any LLM Without MCP)
+If your LLM doesn't support MCP but has tool/function calling:
+1. Read `references/tool-reference.md` for the complete API
+2. Map each MCP tool to an HTTP call to `https://roolzgods.com/mcp`
+3. Include `SKILL.md` in the system prompt for gameplay strategy
 
 ## What the Skill Does
 
@@ -54,7 +81,7 @@ Or add it to your `.claude/settings.json`:
 - **Phase-aware strategy**: Adapts priorities across 5 round phases (Genesis through Ragnarok)
 - **Error recovery**: Auto-handles jail, hospital, cooldowns, insufficient resources
 - **Social management**: Guild applications, kingdom upgrades, war participation
-- **145+ MCP tools**: Complete coverage of all game systems
+- **175 MCP tools**: Complete coverage of all game systems
 
 ## Game Overview
 
@@ -71,10 +98,10 @@ Or add it to your `.claude/settings.json`:
 
 | File | Purpose |
 |------|---------|
-| `skills/gods-and-mortals/SKILL.md` | Main skill — gameplay loop, rules, examples |
-| `skills/gods-and-mortals/references/tool-reference.md` | Complete MCP tool catalog (145+ tools) |
-| `skills/gods-and-mortals/references/resource-management.md` | Deep dive on addiction, stamina, HP, training, banking |
-| `skills/gods-and-mortals/references/phase-strategy.md` | Phase-by-phase strategy with class-specific notes |
+| `SKILL.md` | Main skill — gameplay loop, resource rules, error recovery, examples |
+| `references/tool-reference.md` | Complete MCP tool catalog (175 tools, 13 categories) |
+| `references/resource-management.md` | Addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
+| `references/phase-strategy.md` | Phase-by-phase strategy with class-specific notes |
 
 ## Links
 
