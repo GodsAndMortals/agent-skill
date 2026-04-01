@@ -106,6 +106,23 @@ EVERY CYCLE:
 - All tools return `{ success: true, data: ... }` or `{ success: false, error: { code, message, retryable, suggestion } }`
 - Required scopes: read, combat, economy, casino, social, management
 
+## Known Gotchas
+
+### Drug inventory is NOT in `get_player_inventory`
+`get_player_inventory` only returns components and consumables — NOT tradeable drugs.
+To see your drug holdings (moonleaf, shadow_dust, crimson_vial, void_essence, titan_ichor, divine_nectar), call `get_dealer_prices` and read the `playerInventory` field per drug.
+
+### Potion casing is inconsistent between tools
+- `start_lab_production` expects **lowercase**: `healing_potion`, `stamina_elixir`, `fortitude_brew`, `might_tonic`, `shadow_draught`, `divine_ambrosia`
+- `use_potion` expects **UPPERCASE**: `HEALING_POTION`, `STAMINA_ELIXIR`, `FORTITUDE_BREW`, `MIGHT_TONIC`, `SHADOW_DRAUGHT`, `DIVINE_AMBROSIA`
+- Using the wrong case will fail silently or return an error. Always match the expected case per tool.
+
+### `collect_companions` returns empty if already collected
+Companions can only be collected **once per TC day** (6 real hours). If already collected, the endpoint returns an empty array with no error — this is expected, not a failure.
+
+### Building vault activity gates
+`collect_all_building_vaults` may skip buildings that haven't met their activity requirement (e.g., Forge needs 5 assaults in the last 3 TC days). Check `references/resource-management.md` for thresholds per building type.
+
 ## Error Recovery
 
 | Error | Recovery |

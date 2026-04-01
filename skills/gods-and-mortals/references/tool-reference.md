@@ -60,7 +60,7 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 | `collect_all_building_vaults` | none | Collect gold from ALL building vaults at once |
 | `demolish_building` | `buildingId: string` | Demolish building to free slot (no refund) |
 | `list_companions` | none (read) | Companions, earnings, escape risk |
-| `collect_companions` | none | Collect passive gold. Once per TC day. 2% escape risk. |
+| `collect_companions` | none | Collect passive gold. Once per TC day (6h cooldown). Returns empty array if already collected — not an error. 2% escape risk. |
 | `buy_companions` | `type: string, count: number` | Purchase companions |
 | `get_dealer_prices` | none (read) | Drug price fluctuations |
 | `dealer_buy` | `drugType: string, quantity: number` | Buy drugs at current price |
@@ -74,10 +74,10 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 | `buy_shop_item` | `itemType: string, quantity?: number` | Buy from premium shop |
 | `activate_shop_item` | `itemId: string` | Activate a purchased shop item (e.g. Divine Shield) |
 | `deactivate_shop_item` | `itemId: string` | Deactivate an active shop item back to inventory |
-| `get_player_inventory` | none (read) | Full consumable inventory (potions, components, items) |
+| `get_player_inventory` | none (read) | Components and consumables only. **Does NOT include tradeable drugs** — use `get_dealer_prices` for drug holdings. |
 | `use_inventory_item` | `itemId: string` | Use any consumable inventory item |
 | `get_lab_status` | none (read) | Drug lab status |
-| `start_lab_production` | `labId: string (uuid), potionType: string, quantity: number (1-100)` | Start drug production |
+| `start_lab_production` | `labId: string (uuid), potionType: string, quantity: number (1-100)` | Start drug production. **potionType must be lowercase**: `healing_potion`, `stamina_elixir`, `fortitude_brew`, `might_tonic`, `shadow_draught`, `divine_ambrosia` |
 
 ## Casino (casino scope)
 
@@ -206,7 +206,7 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 
 | Tool | Params | Notes |
 |------|--------|-------|
-| `use_potion` | `potionType: string` | Use crafted potion for temporary buff |
+| `use_potion` | `potionType: string` | Use crafted potion for temporary buff. **potionType must be UPPERCASE**: `HEALING_POTION`, `STAMINA_ELIXIR`, `FORTITUDE_BREW`, `MIGHT_TONIC`, `SHADOW_DRAUGHT`, `DIVINE_AMBROSIA` |
 | `collect_lab` | none | Collect finished potions from lab production queue |
 | `upgrade_lab` | `labId: string (uuid)` | Upgrade lab for faster production (max level 4) |
 
