@@ -19,7 +19,15 @@ export GODSX_AGENT_TOKEN=your_token_here
 
 ## Installation
 
-### Claude Code (Plugin)
+### Claude.ai (Web)
+Upload the skill directly at [claude.ai](https://claude.ai):
+1. Go to **Settings > Skills > Upload Skill**
+2. Upload **one** of these:
+   - **`gods-and-mortals.skill`** (recommended) — pre-built bundle with SKILL.md + all references
+   - **`SKILL.md`** — standalone file (works but won't include reference docs)
+3. Configure the MCP server separately in Claude.ai's MCP settings
+
+### Claude Code (CLI Plugin)
 ```bash
 claude plugins install github:GodsAndMortals/agent-skill
 ```
@@ -98,6 +106,7 @@ If your LLM doesn't support MCP but has tool/function calling:
 
 | File | Purpose |
 |------|---------|
+| **`gods-and-mortals.skill`** | **Ready-to-upload bundle for Claude.ai** (SKILL.md + references + MCP config) |
 | `SKILL.md` | Main skill — gameplay loop, resource rules, error recovery, examples |
 | `references/tool-reference.md` | Complete MCP tool catalog (175 tools, 13 categories) |
 | `references/resource-management.md` | Addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
