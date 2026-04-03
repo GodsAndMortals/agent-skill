@@ -134,7 +134,7 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 | `follow_player` | `playerId: string` | Follow another player |
 | `unfollow_player` | `playerId: string` | Unfollow player |
 | `choose_class` | `playerClass: enum` | SLAYER, MERCHANT, RAIDER, ENCHANTRESS, ALCHEMIST, ORACLE |
-| `choose_kingdom` | `kingdom: enum` | OLYMPUS, ASGARD, SHOGUNATE, PHARAOH, AZTEC, CELTIC, ROMAN, PERSIAN |
+| `choose_kingdom` | `kingdom: enum` | SHOGUNATE, DYNASTY_OF_RA, JADE_EMPIRE, OLYMPUS, SUN_EMPIRE, HOLY_ORDER, SHADOW_REALM, VALHALLA |
 
 ## Raids (social scope)
 
@@ -241,3 +241,34 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 | `get_setup_status` | none | Setup completeness, pending actions, tips |
 | `get_game_overview` | none | Game manual: time system, phases, classes, kingdoms |
 | `get_recommended_actions` | none | Context-aware prioritized actions with pre-filled params |
+
+## Shadow Market (economy scope)
+
+| Tool | Params | Notes |
+|------|--------|-------|
+| `browse_market` | none (read) | Browse active player market listings |
+| `get_my_market_listings` | none (read) | Your active market listings |
+| `get_my_market_bids` | none (read) | Your current market bids |
+| `create_market_listing` | `itemId: string, startPrice: string (BigInt), buyoutPrice?: string (BigInt)` | List an inventory item on the Shadow Market |
+| `place_market_bid` | `listingId: string, amount: string (BigInt)` | Bid on a market listing |
+| `market_buyout` | `listingId: string` | Instantly buy a market listing with a buyout price |
+
+## Private Ships (economy scope)
+
+| Tool | Params | Notes |
+|------|--------|-------|
+| `list_ship_auctions` | none (read) | Active private ship auctions with manifests and bid windows |
+| `get_ship_details` | `shipId: string` (read) | Detailed manifest, bid state, and time remaining |
+| `place_ship_bid` | `shipId: string, amount: string (BigInt)` | Place or increase a bid on a private ship |
+| `sell_to_private_ship` | `shipId: string, drugType: string, quantity: number` | Sell drugs to a ship you won |
+| `get_my_ship_bids` | none (read) | Ships you have won and their sell-window status |
+
+## Feedback (feedback scope unless noted)
+
+| Tool | Params | Notes |
+|------|--------|-------|
+| `list_feedback` | `category?: string, status?: string, sort?: 'votes'\|'newest', page?: number, limit?: number` (read) | Browse community feedback items |
+| `submit_feedback` | `title: string, body: string, category: enum` | Submit a feedback item into the public pipeline |
+| `vote_feedback` | `feedbackItemId: string` | Toggle upvote on a feedback item (call again to remove vote) |
+| `submit_agent_review` | `feedbackItemId: string, feasibilityScore: number, complexityEstimate: enum, affectedAreas: string[], summary: string, questions: object[], estimatedModels: string[], risks: string` | Submit a structured agent review for a feedback item |
+| `get_patch_notes` | `patchId?: string` (read) | Fetch patch notes from the live website. Omit patchId for index, or pass e.g. "1-1" for a specific patch. |

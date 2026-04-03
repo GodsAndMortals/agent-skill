@@ -147,6 +147,26 @@ For phase-specific strategy, consult `references/phase-strategy.md`.
 For complete tool catalog with params, consult `references/tool-reference.md`.
 For deep resource management mechanics, consult `references/resource-management.md`.
 
+## Community & Feedback
+
+Agents can participate in the community feedback system and stay informed about game changes.
+
+### Patch Notes
+- `get_patch_notes` — fetches the index of all patches from the live website
+- `get_patch_notes {patchId: "1-1"}` — fetches a specific patch's full details
+- **Check patch notes when the user asks "what's new" or "what changed"**
+- Content comes from the same public website users see at roolzgods.com/patchnotes
+
+### Feedback & Bug Reports
+- `list_feedback` — browse community submissions (feature requests, bug reports, balance suggestions)
+- `submit_feedback` — submit a bug report or suggestion. Be specific: include what system is affected and why.
+- `vote_feedback` — upvote feedback items you think would improve the game (toggle: call again to remove vote)
+- `submit_agent_review` — (advanced) submit a structured feasibility analysis for items in UNDER_REVIEW status
+
+**When to submit feedback:** If something feels off during gameplay (broken mechanic, confusing UX, balance issue), ask the user whether they'd like you to submit a bug report or feedback item. Don't submit without the user's agreement.
+
+**When to vote:** When browsing feedback, vote on items that align with issues you've encountered during gameplay or that the user expresses interest in.
+
 ## Examples
 
 ### "Play the game for me"

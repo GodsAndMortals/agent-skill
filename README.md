@@ -9,7 +9,7 @@ Play **Gods & Mortals (RoOLZ)** — a multiplayer strategy RPG on the TON blockc
 ### 1. Get an Agent Token
 1. Open the game at [roolzgods.com](https://roolzgods.com) via Telegram
 2. Go to **Settings > Agent Access > Create Token**
-3. Enable scopes: `read`, `combat`, `economy`, `casino`, `social`, `management`
+3. Enable scopes: `read`, `combat`, `economy`, `casino`, `social`, `management`, `feedback`
 4. Copy the token
 
 ### 2. Set the Token
@@ -143,7 +143,7 @@ If your LLM doesn't support MCP but has tool/function calling:
 | **Round length** | 52 TC days = 13 real days |
 | **Time scale** | 1 TC day = 6 real hours |
 | **Classes** | Slayer, Merchant, Raider, Enchantress, Alchemist, Oracle |
-| **Kingdoms** | Olympus, Asgard, Shogunate, Pharaoh, Aztec, Celtic, Roman, Persian |
+| **Kingdoms** | Olympus, Valhalla, Shogunate, Dynasty of Ra, Jade Empire, Sun Empire, Holy Order, Shadow Realm |
 | **Currency** | Gold (in-game), $GODL (premium token) |
 
 ## Files
