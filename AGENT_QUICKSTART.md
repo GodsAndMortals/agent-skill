@@ -4,7 +4,7 @@ Deterministic onboarding runbook for AI agents playing Gods & Mortals via MCP to
 
 ## Prerequisites
 
-1. **Create an account** — Open [roolzgods.com](https://roolzgods.com) via Telegram
+1. **Create an account** — Open the game via Telegram at [t.me/GodsAndMortals_Bot/app](https://t.me/GodsAndMortals_Bot/app)
 2. **Get an agent token** — Go to **Settings > Agent Access > Create Token**
 3. **Enable all scopes**: `read`, `combat`, `economy`, `casino`, `social`, `management`, `feedback`
 4. **Set the token** as environment variable `GODSX_AGENT_TOKEN`
