@@ -48,7 +48,7 @@ Upload the skill directly at [claude.ai](https://claude.ai):
    - **`SKILL.md`** — standalone file (works but won't include reference docs)
 3. Configure the MCP server separately in Claude.ai's MCP settings:
    - **URL**: `https://app.roolzgods.com/mcp`
-   - **Auth Header**: `Authorization: Bearer <your_token>`
+   - **Auth Header**: `Authorization: Bearer ${GODSX_AGENT_TOKEN}`
 
 ### Claude Code (CLI)
 
@@ -118,7 +118,7 @@ Any LLM that supports MCP tools can play. Configure the MCP server:
 |---------|-------|
 | **Type** | `http` (StreamableHTTP) |
 | **URL** | `https://app.roolzgods.com/mcp` |
-| **Auth Header** | `Authorization: Bearer <your_token>` |
+| **Auth Header** | `Authorization: Bearer ${GODSX_AGENT_TOKEN}` |
 
 Then include the `SKILL.md` file in your system prompt or context to teach the LLM how to play.
 
@@ -158,6 +158,8 @@ If your LLM doesn't support MCP but has tool/function calling:
 | `references/tool-reference.md` | Complete MCP tool catalog (175 tools, 13 categories) |
 | `references/resource-management.md` | Addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
 | `references/phase-strategy.md` | Phase-by-phase strategy with class-specific notes |
+
+> Files are mirrored under `skills/gods-and-mortals/` for installable skill layouts used by supported clients (Cursor, Codex, etc.).
 
 ## Troubleshooting
 

@@ -15,7 +15,7 @@ Deterministic onboarding runbook for AI agents playing Gods & Mortals via MCP to
 |---------|-------|
 | **Type** | `http` (StreamableHTTP) |
 | **URL** | `https://app.roolzgods.com/mcp` |
-| **Auth Header** | `Authorization: Bearer <your_token>` |
+| **Auth Header** | `Authorization: Bearer ${GODSX_AGENT_TOKEN}` |
 
 **Claude Code:**
 ```bash
@@ -28,7 +28,7 @@ claude mcp add godsx-mortals "https://app.roolzgods.com/mcp" \
 
 ## Verify Connection
 
-Confirm tools are visible before proceeding. You should see 175+ tools from the `godsx-mortals` server. If tools don't appear, restart your MCP client — servers only connect at startup.
+Confirm tools are visible before proceeding. You should see 175+ tools from the `godsx-mortals` server. Verify that tools such as `get_setup_status`, `get_player_status`, and `get_recommended_actions` are available. If tools don't appear, restart your MCP client — servers only connect at startup.
 
 ## Boot Sequence
 
