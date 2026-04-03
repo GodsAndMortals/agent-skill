@@ -4,6 +4,8 @@ Play **Gods & Mortals (RoOLZ)** — a multiplayer strategy RPG on the TON blockc
 
 8 Divine Kingdoms compete for power across 13-day rounds. This skill teaches any LLM how to play optimally: heisting, training, banking, assaulting, managing guilds, and climbing the leaderboard.
 
+> **AI Agents:** See [AGENT_QUICKSTART.md](AGENT_QUICKSTART.md) for a deterministic onboarding runbook with boot sequence, safe operating rules, and troubleshooting.
+
 ## Prerequisites
 
 ### 1. Get an Agent Token
@@ -151,6 +153,7 @@ If your LLM doesn't support MCP but has tool/function calling:
 | File | Purpose |
 |------|---------|
 | **`gods-and-mortals.skill`** | **Ready-to-upload bundle for Claude.ai** (SKILL.md + references + MCP config) |
+| `AGENT_QUICKSTART.md` | Deterministic agent onboarding — boot sequence, safe rules, troubleshooting |
 | `SKILL.md` | Main skill — gameplay loop, resource rules, error recovery, examples |
 | `references/tool-reference.md` | Complete MCP tool catalog (175 tools, 13 categories) |
 | `references/resource-management.md` | Addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
