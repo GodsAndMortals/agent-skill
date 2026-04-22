@@ -45,8 +45,12 @@ EVERY CYCLE:
   8. IF tcDay >= 15 AND HP >= 30% → get_assault_suggestions → preview_assault_target {targetId} → execute_assault {targetId}
   9. collect_companions {} (once per TC day — free passive gold)
   9b. get_achievements {} (periodic progress review — check badge/medal progress)
-  10. WAIT for training to complete, then restart from 1
+  10. IF training is active, do non-blocking actions while waiting: browse_market, get_dealer_prices → dealer_buy/sell, create_investment, get_achievements, guild/kingdom chat, auction browse. Then restart from 1 when training completes.
 ```
+
+**Efficiency: don't re-poll `get_recommended_actions` every micro-step.** Call it once per cycle (or after an error / state-changing action like `tavern_refill`, `execute_assault`, `start_training`). Between those, just execute the listed actions.
+
+**Prefer `use_all_stamina` over `attempt_heist`.** It batches up to 50 heists in one call and auto-stops on jail/hospital. Single `attempt_heist` calls are for special cases only (e.g. probing a heist type before committing stamina).
 
 ## Critical Resource Rules
 

@@ -8,7 +8,7 @@ Each round has 5 phases. Your priorities shift dramatically between phases.
 
 Actions:
 1. Choose class (Slayer for ranking, Merchant for gold, Raider for heists)
-2. Choose kingdom (SHOGUNATE for Slayer, PHARAOH for Raider, AZTEC for Merchant)
+2. Choose kingdom (any of the 8: SHOGUNATE, DYNASTY_OF_RA, JADE_EMPIRE, OLYMPUS, SUN_EMPIRE, HOLY_ORDER, SHADOW_REALM, VALHALLA). SHOGUNATE is a strong default for Slayer/Raider per current meta; other kingdoms are viable picks.
 3. Start training immediately (MIGHT for Slayer, WISDOM for others)
 4. Do basic heists (PETTY_THEFT, MARKET_HEIST) to earn initial gold
 5. Bank everything

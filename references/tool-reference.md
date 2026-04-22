@@ -28,10 +28,10 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 | `preview_assault_target` | `targetId: string` (read) | Preview target stats and estimated outcome before committing |
 | `get_assault_detail` | `assaultId: string` (read) | Single assault log with full combat details |
 | `execute_assault` | `targetPlayerId: string` | PvP attack. 2-3/day max. Transfers stats from loser. |
-| `list_hunting_grounds` | none (read) | Hunting locations with rewards |
-| `fight_hunting_ground` | `tavernId: string` | Combat at hunting location for gold + components (auto enter+fight) |
-| `list_beasts` | `category: string` (read) | List beasts in a specific hunting tavern category |
-| `preview_beast_fight` | `beastId: string` (read) | Preview fight outcome for a specific beast |
+| `list_hunting_grounds` | none (read) | Hunting tavern categories (beginner / fixed / dynamic). Start here. |
+| `list_hunting_beasts` | `tavernCategory: string` (read) | Beasts in a category (e.g. `"beginner"`). Returns beast IDs like `"cave_imp"`. |
+| `preview_hunting_beast` | `beastId: string` (read) | Preview fight outcome (win %, rewards, risk) before committing. Pass beast ID, NOT tavern ID. |
+| `fight_hunting_beast` | `beastId: string` | Fight a beast for gold + components. Auto-enters the tavern. Pass beast ID, NOT tavern ID. |
 | `deploy_sabotage` | `victimId: string, agentType: enum` | Sabotage a player. agentType: SHADOW_SPY, DARK_ASSASSIN, VOODOO_PRIEST, DIVINE_WRAITH, PHANTOM_THIEF, SIREN_AGENT, CHAOS_ALCHEMIST |
 | `get_sabotage_guard_status` | none (read) | Guard status on your districts |
 | `buy_sabotage_guard` | `guardType: string` | Buy protection on district |
@@ -59,6 +59,7 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 | `collect_building_vault` | `buildingId: string` | Collect accumulated gold from a single building vault |
 | `collect_all_building_vaults` | none | Collect gold from ALL building vaults at once |
 | `demolish_building` | `buildingId: string` | Demolish building to free slot (no refund) |
+| `prestige_building` | `buildingId: string` | Prestige a max-level building for permanent production bonus + reset to level 1 |
 | `list_companions` | none (read) | Companions, earnings, escape risk |
 | `collect_companions` | none | Collect passive gold. Once per TC day (6h cooldown). Returns empty array if already collected — not an error. 2% escape risk. |
 | `buy_companions` | `type: string, count: number` | Purchase companions |
@@ -185,6 +186,7 @@ Complete catalog of MCP tools organized by scope. Required params shown with typ
 | `toggle_equipment_lock` | `itemId: string` | Toggle lock on equipment to prevent accidental selling |
 | `enhance_equipment` | `equipmentId: string, useProtectionScroll?: boolean` | Upgrade equipment tier (+0 to +15) |
 | `preview_enhancement` | `equipmentId: string` (read) | Preview enhancement cost, chance, and risk zone |
+| `get_enhancement_breakdown` | `equipmentId: string` (read) | Detailed enhancement math: per-level success rates, costs, and risk zones |
 | `auto_enhance_equipment` | `itemId: string, targetLevel: number` | Auto-enhance equipment to a target level in sequence |
 | `check_level_up` | none (read) | Check if level-up is available based on respect and stats |
 | `get_missions` | none (read) | Current daily mission with progress |

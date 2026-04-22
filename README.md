@@ -177,7 +177,7 @@ Reporting:
 - **Phase-aware strategy**: Adapts priorities across 5 round phases (Genesis through Ragnarok)
 - **Error recovery**: Auto-handles jail, hospital, cooldowns, insufficient resources
 - **Social management**: Guild applications, kingdom upgrades, war participation
-- **175 MCP tools**: Complete coverage of all game systems
+- **189 MCP tools**: Complete coverage of all game systems
 
 ## Game Overview
 
@@ -197,7 +197,7 @@ Reporting:
 | **`gods-and-mortals.skill`** | **Ready-to-upload bundle for Claude.ai** (SKILL.md + references + MCP config) |
 | `AGENT_QUICKSTART.md` | Deterministic agent onboarding — boot sequence, safe rules, troubleshooting |
 | `SKILL.md` | Main skill — gameplay loop, resource rules, error recovery, examples |
-| `references/tool-reference.md` | Complete MCP tool catalog (175 tools, 13 categories) |
+| `references/tool-reference.md` | Complete MCP tool catalog (189 tools, 13 categories) |
 | `references/resource-management.md` | Addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
 | `references/phase-strategy.md` | Phase-by-phase strategy with class-specific notes |
 

@@ -28,7 +28,7 @@ claude mcp add godsx-mortals "https://app.roolzgods.com/mcp" \
 
 ## Verify Connection
 
-Confirm tools are visible before proceeding. You should see 175+ tools from the `godsx-mortals` server. Verify that tools such as `get_setup_status`, `get_player_status`, and `get_recommended_actions` are available. If tools don't appear, restart your MCP client — servers only connect at startup.
+Confirm tools are visible before proceeding. You should see 189 tools from the `godsx-mortals` server. Verify that tools such as `get_setup_status`, `get_player_status`, and `get_recommended_actions` are available. If tools don't appear, restart your MCP client — servers only connect at startup.
 
 ## Boot Sequence
 
