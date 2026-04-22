@@ -9,7 +9,7 @@ description: >
   round-based mythological RPG.
 metadata:
   author: PromptEra
-  version: 1.1.0
+  version: 1.2.0
   mcp-server: godsx-mortals
 ---
 
@@ -19,7 +19,11 @@ Gods & Mortals (RoOLZ) is a multiplayer strategy RPG on the TON blockchain. 8 Di
 
 ## Strategy is the user's decision
 
-This skill does not tell the user how to play. Before committing to a playstyle, **ask what they want to optimize for** — unless they've already said, or you're continuing a previous plan. Example archetypes users might pick:
+This skill does not tell the user how to play. Before committing to a playstyle, **ask what they want to optimize for** — unless they've already said, or you're continuing a previous plan.
+
+A good first step is to check `references/rewards.md` (structure) and `get_patch_notes` (live round categories) together. The round pays out for many different niches — money, prestige medals, or permanent badges — and different categories reward wildly different play. Pointing the user at the actual prize list often changes what they want to optimize for.
+
+Example archetypes users might pick:
 
 | Archetype | Focus | Natural class fit |
 |-----------|-------|-------------------|
@@ -202,7 +206,8 @@ The canonical flow is `list_hunting_grounds` → `list_hunting_beasts {tavernCat
 ## Reference docs
 
 - `references/systems-overview.md` — deep dive per system with strategic levers
-- `references/phase-strategy.md` — phase-by-phase with archetype-specific tilts
+- `references/phase-strategy.md` — phase mechanics: unlocks, gates, maturity/decay windows (no prescribed loops)
+- `references/rewards.md` — what the round pays out for: TON categories, medals, badges (for co-designing strategy with the user)
 - `references/resource-management.md` — exact formulas and thresholds
 - `references/tool-reference.md` — full 189-tool catalog with params
 

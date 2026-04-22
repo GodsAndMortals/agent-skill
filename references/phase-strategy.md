@@ -1,158 +1,100 @@
-# Phase Strategy Guide
+# Phase Mechanics
 
-A round has 5 phases. Unlocks shift; priorities shift with the user's archetype (see SKILL.md §Strategy is the user's decision). Each phase below lists what *unlocks*, what most archetypes find *high-leverage*, and how archetypes *tilt* — without prescribing one loop.
+**What this is:** the fixed game physics of each round phase — unlocks, gates, decay, maturity windows. What the agent can't figure out from tools alone.
 
-## Genesis (TC Days 1-4)
+**What this is not:** a playbook. This file deliberately does not say "do X then Y." Strategy is the user's decision (see `SKILL.md §Strategy is the user's decision` and `references/rewards.md` for what the round pays out for). Use this reference to reason about *what is possible* in the current phase, not to follow a prescribed loop.
 
-**Unlocks:** heists, training, banking, tavern, early shop, basic equipment, hunting grounds, academy enrollment, companion purchases (at low tiers).
+A round is 52 TC days (13 real days). 1 TC day = 6 real hours.
 
-High-leverage for most archetypes:
-1. Pick class + kingdom (irreversible — confirm with user first)
-2. Start a training cycle (stat choice depends on archetype; restart immediately on collect)
-3. Early heists (PETTY_THEFT, MARKET_HEIST tiers) to bootstrap gold
-4. Bank everything; keep a small buffer for emergencies
+## Phase boundaries
 
-Commonly deprioritized (but not forbidden):
-- Buildings — usually locked until Expansion
-- PvP assaults — protection still up for most
-- Casino — volatile on a small bankroll; Gamblers may still exposure-test
-- Aggressive tavern refills — early addiction compounds across the round
+| Phase | TC Days | Real days (approx) |
+|---|---|---|
+| Genesis | 1–4 | 0–1 |
+| Expansion | 5–14 | 1–3.5 |
+| Conquest | 15–34 | 3.5–8.5 |
+| Endgame | 35–45 | 8.5–11.25 |
+| Ragnarok | 46–52 | 11.25–13 |
 
-Archetype tilt:
-- **Tycoon**: buy the first building the moment it unlocks; start companion cycle
-- **Trader**: start tracking dealer prices across cycles to model spreads
-- **Gambler**: small lottery buys at current jackpot; low-cost exposure to endgame payout
-- **Diplomat**: scout guilds early (`search_guilds`); the best ones fill fast
+## Unlocks by phase
 
-## Expansion (TC Days 5-14)
+Each row is *newly available* in that phase; prior-phase features carry forward.
 
-**Unlocks:** buildings, companions at higher tiers, guilds (level 3+), higher heist tiers as you level, academy courses, lab, shadow market, auction house, investments (mid-phase).
+### Genesis (TC 1–4)
+- Class + kingdom selection (irreversible — `choose_class`, `choose_kingdom` confirm first)
+- Heists — all tiers you qualify for by level
+- Training — 30-min sessions
+- Banking (interest accrues from tick 1)
+- Tavern refill + tavern heal
+- Shop (basic tier items) + equipment shop
+- Companions (low tiers)
+- Hunting grounds
+- Academy enrollment
+- Starting PvP **protection** is active for most players — assaults blocked until level 7 or `remove_protection` (irreversible this round)
 
-Commonly high-leverage:
-1. Continue training — collect/restart each session
-2. Heists at the highest tier you qualify for
-3. First buildings aligned with your activity pattern
-4. Join/apply to a guild
-5. Collect companions + building vaults each TC day
-6. Enroll in academy courses aligned with your archetype
+### Expansion (TC 5–14)
+- Buildings unlock (all 7 types, level requirements still apply per building)
+- Guilds open for joining (level 3+ to join; guild creation has its own gate)
+- Higher-tier companions
+- Academy courses become worthwhile (apprentice → journeyman progression viable)
+- Drug lab
+- Shadow market + auction house
+- Investments — **check maturity window** before creating; maturity time is in the tool response
+- Divine Mule (leader-triggered for blessed members)
 
-Archetype tilt:
-- **Raider**: `hire_mercenaries` as soon as eligible (200+ tickets, TC day 3+); sell drug drops via dealer/ships
-- **Warlord / Ranker**: consider `remove_protection` for early PvP access (irreversible — confirm)
-- **Trader**: drug arbitrage starts paying; track `get_dealer_prices` spreads
-- **Diplomat**: apply to guilds with strong raid/war upgrades; start chat presence
-- **Tycoon**: prestige any level-maxed building; upgrade active producers
-- **Gambler**: first blackjack / dice sessions with defined bankroll
+### Conquest (TC 15–34)
+- **PvP assaults available by default** (protection auto-drops; `remove_protection` only matters pre-Conquest)
+- Raids (guild-coordinated; requires active guild)
+- Trials (guild boss fights, blessed members only)
+- Guild wars (declaration prerequisites: HQ 6+, assault upgrade 6+, 6+ blessed members)
+- Kingdom wars (2 TC day prep window, auto-resolves via economy tick)
+- District challenges (permanent round bonuses)
+- Higher-tier auctions populate as endgame gear circulates
 
-## Conquest (TC Days 15-34)
+### Endgame (TC 35–45)
+- **Training 60-min sessions** at level 5 + 20 sessions completed
+- **Training 480-min sessions** at level 10 + many sessions completed
+- Nothing else structurally new — this phase is defined by maturity windows closing, not by unlocks
 
-**Unlocks:** PvP assaults (default, no protection-removal needed), raids, trials, guild wars, kingdom wars, district challenges, higher-tier auctions.
+### Ragnarok (TC 46–52)
+- Nothing new unlocks. All remaining systems convert into final respect, wealth, and medal positioning.
 
-Commonly high-leverage:
-1. Maintain training + heist engine
-2. Route activity into raids / trials / wars if in an active guild
-3. Daily: collect companions, building vaults, missions
+## Maturity & decay windows — the Endgame/Ragnarok math
 
-Archetype tilt:
-- **Warlord / Ranker**: 2-3 assaults/day (3 for Slayer); target weak-stat + high-gold; districts for permanent bonuses
-- **Tycoon**: building upgrades + prestiges; investments maturing
-- **Trader**: lab output peaks; premium private-ship sales
-- **Diplomat**: coordinate raids in chat; lead kingdom/guild wars
-- **Completionist**: many badge thresholds fall in this phase — read `get_achievements` and route actions
-- **Gambler**: jackpot grows; medium-stakes blackjack if bankroll allows
+These are the mechanical constraints that shift what's *possible* late-round. Not prescriptions — inputs for the user's decision.
 
-Safety:
-- Bank before every assault (gold-on-hand is the loss pool)
-- HP ≥ 30% before committing to PvP
-- Respond to jail/hospital immediately; `tavern_heal` has a 2 TC hour cooldown so time it
+- **Investments** — each has a maturity time (see `get_investments`). Investments that mature after TC day 52 return **principal only** (no profit). Verify before creating.
+- **Buildings** — payback period = build cost ÷ net gold per tick. If payback > remaining ticks, the building is a net loss this round. Prestige + demolish rules differ; `upgrade_building` may be cheaper ROI.
+- **Academy courses** — bonuses apply only for the current round. Master-level Academy completion near round end may not recoup its 130M gold cost in remaining play.
+- **Addiction decay** — −2.0 per economy tick (6 real hours). Decaying from addiction 20 → 0 takes ~10 TC days. Refilling heavily in Ragnarok means carrying penalties to round end.
+- **HP regen** — 10% max HP per tick. Floor 10. In Ragnarok, every hospital stay is a full recovery cycle unless you pay `heal_hospital` (300 gold/sec remaining).
+- **Drug stockpile** — persists only to round end. Private ship auctions and dealer spreads are the liquidation routes.
+- **Gold on hand** — only gold on hand counts toward the Wealth medal in some prize categories and is exposed to assault loss; banked gold is safe and counts for other wealth metrics. Check the current rewards criteria (`references/rewards.md`) before deciding whether to bank or hold.
+- **Stat gains** — training applies to respect weights at a multiplier that increases late-round (Divine Favor catch-up). See `resource-management.md`.
+- **Cooldowns at round end** — Sacred Mist / Sacred Springs have 4 TC day cooldowns; Divine Shield lasts 4 TC hours. Time purchases so the duration actually covers the intended window.
 
-## Endgame (TC Days 35-45)
+## Irreversible decisions (always confirm with user)
 
-**Unlocks:** advanced training durations (60-min at lvl 5+20 sessions, 480-min at lvl 10). Nothing else new.
+- `choose_class` — locked for the round.
+- `choose_kingdom` — locked for the round.
+- `remove_protection` — cannot be restored this round. Only matters in Genesis/early Expansion; protection drops automatically in Conquest.
+- `demolish_building` — refund is partial; the building slot reopens but the build cost is sunk.
+- `forfeit_war` — war ends and rewards forfeit.
 
-Commonly high-leverage:
-1. Training weight increases — stats become the primary respect source
-2. Investments if they'll mature before round end (check maturity window)
-3. Optimize building production chains
-4. Drug lab output peaks; stock potions for Ragnarok combat
+## What phase you're in — how to check
 
-Commonly deprioritized:
-- New buildings — payback window may be shorter than remaining round
-- Long-maturity investments — verify they finish before TC day 52
-- Low-EV casino tiers (relative expected value shrinks)
+- `get_player_status` → `tcDay` field → cross-reference the table above.
+- `get_game_overview` → includes current phase.
+- Don't hard-code phase from real-world dates — rounds can be manually advanced or paused, and PENDING rounds may block actions.
 
-Archetype tilt:
-- **Tycoon**: investments + mature auction sales
-- **Warlord**: assault efficiency peaks as you out-scale most targets
-- **Gambler**: lottery jackpot is near its ceiling — most rational buy-in window
-- **Completionist**: final-mile badge pushes
-- **Trader**: liquidate drug stockpile; shift to gold-heavy position
+## How to reason about phase without prescribing a loop
 
-## Ragnarok (TC Days 46-52)
+The user decides the strategy (see `SKILL.md` archetypes and `references/rewards.md`). The agent's job per cycle:
 
-**Unlocks:** nothing new. Everything converts to respect, wealth, and medal positioning.
+1. Establish what the user is optimizing for (once, at session start — persist the answer).
+2. Read current state: `get_player_status`, `get_recommended_actions`, phase.
+3. Filter the system map (`SKILL.md §System map`) to what's **unlocked now** (this file) and **relevant to the user's goal** (rewards.md + archetype).
+4. Resolve blockers (jail/hospital/training complete) and bank before risk — these are game physics, not strategy.
+5. Pick the action from the filtered set. Explain the choice if non-obvious.
 
-Commonly high-leverage:
-1. Maximize stat training
-2. Aggressive PvP — stat-steal is the fastest remaining respect source
-3. Collect all passive income — no reason to save for later
-4. Final guild donations (donation respect)
-5. Liquidate auctions + shadow market; gold-on-hand + bank both contribute to Wealth medal
-
-Commonly deprioritized:
-- New buildings / investments that won't mature
-- Long speculative positions
-
-Archetype tilt:
-- **Ranker / Warlord**: full PvP push; break glass on scrolls, potions, Divine Shield
-- **Gambler**: Hail-Mary lottery if behind on rank
-- **Completionist**: last-call thresholds — work backward from `get_achievements`
-- **Trader**: convert everything to gold
-- **Diplomat**: coordinate your kingdom's final war contributions
-
-## Class-specific context (descriptive, not prescriptive)
-
-Pick based on what you want to optimize. Each class has bonuses; none is "best" universally.
-
-### Slayer
-- 3 assaults/day (+1 vs others), 2× respect per stat point
-- Academy: Path of the Blade (+3/6/10% assault power)
-- Common pairings (meta-driven, not forced): MIGHT primary stat, SHOGUNATE kingdom
-- Fit: Ranker, Warlord
-
-### Merchant
-- 6 building slots (vs 4), 40% building discount
-- Academy: Principles of Commerce (+3/6/10% building production)
-- Fit: Tycoon, Trader (economy lean)
-
-### Raider
-- +20% heist rewards, 120 tickets/day (vs 72)
-- Academy: Art of the Heist (+5/10/15% heist reward)
-- Fit: Raider, Trader (drug byproducts)
-
-### Enchantress
-- +15% companion earnings, cheaper guild upgrades
-- Academy: Ways of Enchantment (+5/10/15% companion earnings)
-- Fit: Diplomat, sabotage-heavy Warlord
-
-### Alchemist
-- +20% drug profits, faster lab production
-- Academy: Secrets of Alchemy (+5/10/15% drug production)
-- Fit: Trader, potion-stacking Warlord
-
-### Oracle
-- +1% investment returns, cheaper academy tuition
-- Patient, economy-adjacent
-- Fit: Tycoon, Gambler (investment edge), patient Ranker
-
-## Kingdom picks
-
-All 8 kingdoms are viable: SHOGUNATE, DYNASTY_OF_RA, JADE_EMPIRE, OLYMPUS, SUN_EMPIRE, HOLY_ORDER, SHADOW_REALM, VALHALLA.
-
-Recent round data shows SHOGUNATE clusters strong Slayer/Raider players, but meta varies by round and kingdom upgrades shift balance. The user's kingdom affects:
-- Shared treasury and upgrades (Sovereign-managed)
-- Kingdom war participation
-- Tax rate on certain activities
-- Access to kingdom chat + politics
-
-Ask the user if they have a preference (e.g. aesthetic, friends in a kingdom, political ambitions) before defaulting.
+This keeps decisions the user's call, while still guaranteeing the agent doesn't waste cycles on features that aren't available yet or that have closed their payback window.

@@ -119,4 +119,5 @@ For detailed strategy, refer to SKILL.md and references/.
 - **Full gameplay strategy**: Read `SKILL.md`
 - **Complete tool catalog**: Read `references/tool-reference.md`
 - **Resource management deep dive**: Read `references/resource-management.md`
-- **Phase-specific strategy**: Read `references/phase-strategy.md`
+- **Phase mechanics** (unlocks, gates, maturity windows): Read `references/phase-strategy.md`
+- **What the round pays out for** (TON prizes, medals, badges): Read `references/rewards.md`
