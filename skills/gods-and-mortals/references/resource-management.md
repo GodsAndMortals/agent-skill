@@ -69,10 +69,12 @@ Examples:
 - `use_all_stamina` auto-spends until stamina = 0 or max 50 heists
 
 ### Strategy
-- Spend tickets on heists FIRST (higher value than training alone)
-- Stop at tickets <= 10 (emergency buffer for bribe/heal)
-- Only then start training
-- Resume heisting when tickets regenerate above 10
+
+The conventional pattern is "spend tickets on heists first, train on the remainder" — tickets have a ceiling, so unspent tickets past the cap are wasted regen. But this isn't universal:
+- **Raider / Balanced**: spend tickets on the highest-tier heist you qualify for; train with ticket depletion as the natural break
+- **Ranker / Warlord**: stats → respect fastest; training may outweigh heist gold once gear/buildings cover economy
+- **Tycoon**: building vault activity gates may demand a minimum heist cadence regardless of ticket efficiency
+- **Universal**: keep a small buffer (~10 tickets) so `bribe_jail` or heist fallback is affordable after unlucky runs
 
 ## HP System
 
@@ -127,10 +129,11 @@ Examples:
 - Social actions (chat, guild)
 
 ### Strategy
-- Default to 30-min sessions (always available, frequent collect cycles)
-- Best stat: Slayer = MIGHT, all others = WISDOM
-- NEVER start training with tickets > 10 (waste of heist income)
-- Collect + restart IMMEDIATELY when done (zero idle time)
+- 30-min sessions are the most flexible — more frequent collect cycles, compatible with any play pattern
+- Longer sessions (60-min, 480-min) suit AFK play or overnight runs where you can't intervene
+- Stat choice is archetype-driven — common pairings: Slayer → MIGHT (assault power, 2× respect/stat), Merchant/Tycoon → WISDOM (economic multipliers), Warlord → MIGHT or FORTITUDE (survivability), Trader → WISDOM, Oracle/Ranker → user preference per their plan
+- Don't leave completed training uncollected — the session is over but stats aren't applied until `collect_training`
+- "Train only when tickets are depleted" is a common default, not a rule — Rankers may train earlier to prioritize stat-respect
 
 ## Gold & Banking
 

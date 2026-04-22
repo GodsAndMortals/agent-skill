@@ -198,8 +198,9 @@ Reporting:
 | `AGENT_QUICKSTART.md` | Deterministic agent onboarding — boot sequence, safe rules, troubleshooting |
 | `SKILL.md` | Main skill — gameplay loop, resource rules, error recovery, examples |
 | `references/tool-reference.md` | Complete MCP tool catalog (189 tools, 13 categories) |
-| `references/resource-management.md` | Addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
-| `references/phase-strategy.md` | Phase-by-phase strategy with class-specific notes |
+| `references/systems-overview.md` | Every game system: purpose, tools, strategic levers, gotchas |
+| `references/resource-management.md` | Exact formulas: addiction, stamina, HP, training, banking, vaults, auctions, academy, achievements |
+| `references/phase-strategy.md` | Phase-by-phase options with archetype-specific tilts |
 
 > Files are mirrored under `skills/gods-and-mortals/` for installable skill layouts used by supported clients (Cursor, Codex, etc.).
 
