@@ -4,6 +4,8 @@ Play **Gods & Mortals (RoOLZ)** — a multiplayer strategy RPG on the TON blockc
 
 8 Divine Kingdoms compete for power across 13-day rounds. This skill teaches any LLM how to play optimally: heisting, training, banking, assaulting, managing guilds, and climbing the leaderboard.
 
+> **New here?** Start with the illustrated introduction at **[roolzgods.com/patchnotes/agentic-play](https://roolzgods.com/patchnotes/agentic-play)** — it covers what the skill does, how it plays, and walks through setup in five minutes.
+>
 > **AI Agents:** See [AGENT_QUICKSTART.md](AGENT_QUICKSTART.md) for a deterministic onboarding runbook with boot sequence, safe operating rules, and troubleshooting.
 
 ## Prerequisites
@@ -217,6 +219,7 @@ Reporting:
 ## Links
 
 - **Game**: [roolzgods.com](https://roolzgods.com)
+- **Skill introduction**: [roolzgods.com/patchnotes/agentic-play](https://roolzgods.com/patchnotes/agentic-play)
 - **MCP Endpoint**: `https://app.roolzgods.com/mcp` (StreamableHTTP)
 - **Author**: [PromptEra](https://github.com/PromptEra)
 
